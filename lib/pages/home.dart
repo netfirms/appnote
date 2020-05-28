@@ -59,10 +59,14 @@ class _HomeState extends State<Home> {
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 8,),
+                        SizedBox(
+                          height: 8,
+                        ),
                         Text("${noteList.totalNoteList[index].message}",
                             style: TextStyle(fontSize: 18)),
-                        SizedBox(height: 8,),
+                        SizedBox(
+                          height: 8,
+                        ),
                         noteList.totalNoteList[index].lastUpdate == null
                             ? Text(
                                 "created at ${formatDatetime(noteList.totalNoteList[index].timestamp)}",

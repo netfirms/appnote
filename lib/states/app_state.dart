@@ -11,7 +11,7 @@ class NoteDataState extends ChangeNotifier {
   Account account;
   String _projectId = '5ece91e405eaf';
   String _userId;
-  String _noteColloctionId = '5ece925536a1d';
+  String _noteCollectionId = '5ece925536a1d';
 
   List<NoteModel> _noteList = [];
 
@@ -20,7 +20,7 @@ class NoteDataState extends ChangeNotifier {
   init() {
     appwriteClient = Client(selfSigned: true);
     appwriteClient
-        .setEndpoint('http://10.0.2.2/v1')
+        .setEndpoint('http://10.0.2.2/v1')//// 10.0.2.2 is Android emulator's proxy to access Appwrite server on localhost
         .setProject(_projectId)
         .selfSigned;
     database = Database(appwriteClient);
@@ -75,7 +75,7 @@ class NoteDataState extends ChangeNotifier {
   addNoteData({NoteModel noteModel, String userId}) {
     appwriteClient.setProject(_projectId);
     Future result = database.createDocument(
-      collectionId: '$_noteColloctionId',
+      collectionId: '$_noteCollectionId',
       data: noteModel.toJson(),
       read: ['*'],
       write: [
@@ -97,7 +97,7 @@ class NoteDataState extends ChangeNotifier {
     Future result = database.listDocuments(
       orderField: 'timestamp',
       orderType: OrderType.desc,
-      collectionId: '$_noteColloctionId',
+      collectionId: '$_noteCollectionId',
     );
 
     result.then((response) {
@@ -122,7 +122,7 @@ class NoteDataState extends ChangeNotifier {
     appwriteClient.setProject(_projectId);
     Future result = database.updateDocument(
       documentId: noteModel.id,
-      collectionId: '$_noteColloctionId',
+      collectionId: '$_noteCollectionId',
       data: noteModel.toJson(),
       read: ['*'],
       write: [
@@ -142,7 +142,7 @@ class NoteDataState extends ChangeNotifier {
     appwriteClient.setProject(_projectId);
     Future result = database.deleteDocument(
       documentId: noteModel.id,
-      collectionId: '$_noteColloctionId',
+      collectionId: '$_noteCollectionId',
     );
 
     result.then((response) {
